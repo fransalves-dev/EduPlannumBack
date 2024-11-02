@@ -1,9 +1,11 @@
 import firebase_admin
-from fastapi import FastAPI, HTTPException
-from firebase_admin import credentials, firestore
+from fastapi import FastAPI
+from firebase_admin import credentials
 
 from services.courses import router as courses_router
+from services.files import router as files_router
 from services.folders import router as folders_router
+from services.reminders import router as reminders_router
 
 app = FastAPI()
 
@@ -12,6 +14,8 @@ firebase_admin.initialize_app(cred)
 
 app.include_router(courses_router)
 app.include_router(folders_router)
+app.include_router(files_router)
+app.include_router(reminders_router)
 
 if __name__ == '__main__':
     import uvicorn
